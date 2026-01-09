@@ -4,6 +4,9 @@ from scipy.spatial.distance import cdist
 from pymoo.core.problem import Problem
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.operators.selection.tournament import TournamentSelection
+from CrossOverOperator import PMXCrossover
+from SwapMutationOperator import SwapMutation
+from Permutation__Sampling import Permutation_Sampling
 
 from pymoo.util.nds.non_dominated_sorting import NonDominatedSorting
 
@@ -46,3 +49,13 @@ class Assignment_Problem(Problem):
             distances.append(total_distance)
         out["F"] = np.column_stack([costs, distances])
 
+    def NSGAII_Algorithm(self, size=100):
+        algorithmResponse = NSGA2(
+            pop_size=size,
+            sampling=Permutation_Sampling(),
+            selection=TournamentSelection(func_comp=dominance_comp),
+            crossover=PMXCrossover(prob=1.0),
+            mutation=SwapMutation(prob=0.2),
+            eliminate_duplicates=True
+        )
+        return algorithmResponse
