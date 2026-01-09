@@ -13,3 +13,6 @@ objective = Objectives(100)
 
 # Generate distance matrix - second objective
 distancematrix = objective.distanceMatrix()
+
+# Define problem -
+problem_def = Assignment_Problem(cost_matrix, distancematrix)
