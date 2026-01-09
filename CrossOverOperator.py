@@ -34,4 +34,29 @@ class PMXCrossover(Crossover):
 
             c1[cx1:cx2] = p2[cx1:cx2]
             c2[cx1:cx2] = p1[cx1:cx2]
+            def pmx_fill(child, parent, start, end):
+                        for i in range(start, end):
+                            val = parent[i]
+                            if val not in child:
+                                pos = i
+                                while True:
+                                    val_in_child = child[pos]
+                                    if val_in_child == -1:
+                                        child[pos] = val
+                                        break
+                                    pos = np.where(parent == val_in_child)[0][0]
+
+            pmx_fill(c1, p1, cx1, cx2)
+            pmx_fill(c2, p2, cx1, cx2)
+            for i in range(n_vars):
+                if c1[i] == -1:
+                    c1[i] = p1[i]
+                if c2[i] == -1:
+                    c2[i] = p2[i]
+
+            Y[k, 0] = c1
+            Y[k, 1] = c2
+
+            # Reshape back: (n_matings, n_offspring, n_vars) -> (n_offspring, n_matings, n_vars)
+        return np.swapaxes(Y, 0, 1)
 
