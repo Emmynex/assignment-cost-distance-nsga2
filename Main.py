@@ -1,7 +1,7 @@
 from pymoo.optimize import minimize
 from ReadText import load_data
 from Optimizer import Objectives, Assignment_Problem
-
+from pymoo.termination import get_termination
 import numpy as np
 from Plotter import  plot
 
@@ -22,3 +22,20 @@ problem_def = Assignment_Problem(cost_matrix, distancematrix)
 result = []
 plt = plot(result)
 plt.conflict_plot(cost_matrix, distancematrix)
+
+
+# Create NSGA-II algorithm
+algorithm = problem_def.NSGAII_Algorithm(100)
+
+# Set termination criteria
+termination = get_termination("n_gen", 500)
+
+# Run optimization
+result = minimize(
+    problem_def,
+    algorithm,
+    termination=termination,
+    seed=1,
+    save_history=True,
+    verbose=True
+)
