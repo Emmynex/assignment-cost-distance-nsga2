@@ -22,4 +22,4 @@ def load_data(path, n=100):
                 rows.append(current_row)
                 current_row = []
 
-    return rows
+    return np.array(rows)
