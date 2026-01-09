@@ -4,6 +4,7 @@ import seaborn as sns
 class plot:
     def __init__(self, result):
         self.result = result
+
     def plotPareto(self):
         fig, ax = plt.subplots(figsize=(10, 6))
 

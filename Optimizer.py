@@ -50,6 +50,7 @@ class Assignment_Problem(Problem):
         out["F"] = np.column_stack([costs, distances])
 
     def NSGAII_Algorithm(self, size=100):
+
         algorithmResponse = NSGA2(
             pop_size=size,
             sampling=Permutation_Sampling(),
@@ -61,8 +62,10 @@ class Assignment_Problem(Problem):
         return algorithmResponse
 
 
-# This function performs pairwise Pareto dominance comparisons between individuals in a population by evaluating their objective vectors and returns, for each comparison, whether the first individual dominates the second, the second dominates the first, or neither dominates the otheR
+
+
 def dominance_comp(pop, P, **kwargs):
+
 
     if P.ndim == 1:
         P = P.reshape(-1, 2)

@@ -5,7 +5,6 @@ from pymoo.termination import get_termination
 import numpy as np
 from Plotter import  plot
 
-
 # Load the john beasly dataset which is the cost matrix.
 cost_matrix = load_data('data\\assign100.txt')
 
@@ -23,7 +22,6 @@ result = []
 plt = plot(result)
 plt.conflict_plot(cost_matrix, distancematrix)
 
-
 # Create NSGA-II algorithm
 algorithm = problem_def.NSGAII_Algorithm(100)
 
@@ -39,7 +37,6 @@ result = minimize(
     save_history=True,
     verbose=True
 )
-
 #plot the pareto front
 
 plt = plot(result)
