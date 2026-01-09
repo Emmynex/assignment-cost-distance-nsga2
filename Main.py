@@ -7,16 +7,17 @@ from Plotter import  plot
 
 # Load the john beasly dataset which is the cost matrix.
 cost_matrix = load_data('data\\assign100.txt')
-
+print("costmatrix", cost_matrix)
 # Create objectives instance
 objective = Objectives(100)
 
 # Generate distance matrix - second objective
 distancematrix = objective.distanceMatrix()
-
+print("distancematrix", distancematrix)
 # Define problem -
 problem_def = Assignment_Problem(cost_matrix, distancematrix)
 
+print("problem_def", problem_def)
 #plotting part the conflict
 result = []
 plt = plot(result)
@@ -24,7 +25,7 @@ plt.conflict_plot(cost_matrix, distancematrix)
 
 # Create NSGA-II algorithm
 algorithm = problem_def.NSGAII_Algorithm(100)
-
+print("algorithm", algorithm)
 # Set termination criteria
 termination = get_termination("n_gen", 500)
 
@@ -38,7 +39,7 @@ result = minimize(
     verbose=True
 )
 #plot the pareto front
-
+print("result", result)
 plt = plot(result)
 plt.plotPareto()
 
