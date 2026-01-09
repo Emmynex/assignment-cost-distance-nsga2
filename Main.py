@@ -39,3 +39,22 @@ result = minimize(
     save_history=True,
     verbose=True
 )
+
+#plot the pareto front
+
+plt = plot(result)
+plt.plotPareto()
+
+print("Pareto-optimal solutions found:", result.F.shape[0])
+print("First assignment:", result.X[0])
+print("Cost, Distance:", result.F[0])
+
+
+
+# Print statistics
+print("\n=== Pareto Front Statistics ===")
+print(f"Number of solutions: {result.F.shape[0]}")
+print(f"Cost range: [{result.F[:, 0].min():.2f}, {result.F[:, 0].max():.2f}]")
+print(f"Distance range: [{result.F[:, 1].min():.2f}, {result.F[:, 1].max():.2f}]")
+print(f"\nBest cost solution: Cost={result.F[:, 0].min():.2f}, Distance={result.F[result.F[:, 0].argmin(), 1]:.2f}")
+print(f"Best distance solution: Cost={result.F[result.F[:, 1].argmin(), 0]:.2f}, Distance={result.F[:, 1].min():.2f}")
