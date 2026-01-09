@@ -59,3 +59,39 @@ class Assignment_Problem(Problem):
             eliminate_duplicates=True
         )
         return algorithmResponse
+
+
+# This function performs pairwise Pareto dominance comparisons between individuals in a population by evaluating their objective vectors and returns, for each comparison, whether the first individual dominates the second, the second dominates the first, or neither dominates the otheR
+def dominance_comp(pop, P, **kwargs):
+
+    if P.ndim == 1:
+        P = P.reshape(-1, 2)
+
+    n_comparisons = P.shape[0]
+    result = np.zeros(n_comparisons, dtype=int)
+
+    F = pop.get("F")
+
+    for i in range(n_comparisons):
+        a_idx = P[i, 0]
+        b_idx = P[i, 1]
+
+        a_obj = F[a_idx]
+        b_obj = F[b_idx]
+
+        if a_obj is None or b_obj is None:
+            result[i] = 0
+            continue
+
+        # Check if a dominates b
+        a_better = np.all(a_obj <= b_obj) and np.any(a_obj < b_obj)
+        b_better = np.all(b_obj <= a_obj) and np.any(b_obj < a_obj)
+
+        if a_better:
+            result[i] = -1  # a dominates b
+        elif b_better:
+            result[i] = 1  # b dominates a
+        else:
+            result[i] = 0  # non-dominated
+
+    return result
