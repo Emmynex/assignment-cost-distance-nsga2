@@ -8,12 +8,14 @@ from Plotter import  plot
 # Load the john beasly dataset which is the cost matrix.
 cost_matrix = load_data('data\\assign100.txt')
 print("costmatrix", cost_matrix)
+print("costmatrix shape", cost_matrix.shape)
 # Create objectives instance
 objective = Objectives(100)
 
 # Generate distance matrix - second objective
 distancematrix = objective.distanceMatrix()
 print("distancematrix", distancematrix)
+print("distancematrix shape", distancematrix.shape)
 # Define problem -
 problem_def = Assignment_Problem(cost_matrix, distancematrix)
 
