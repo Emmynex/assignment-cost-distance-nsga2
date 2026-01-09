@@ -1,8 +1,9 @@
 from pymoo.optimize import minimize
 from ReadText import load_data
 from Optimizer import Objectives, Assignment_Problem
-from pymoo.termination import get_termination
+
 import numpy as np
+from Plotter import  plot
 
 
 # Load the john beasly dataset which is the cost matrix.
@@ -16,3 +17,8 @@ distancematrix = objective.distanceMatrix()
 
 # Define problem -
 problem_def = Assignment_Problem(cost_matrix, distancematrix)
+
+#plotting part the conflict
+result = []
+plt = plot(result)
+plt.conflict_plot(cost_matrix, distancematrix)
